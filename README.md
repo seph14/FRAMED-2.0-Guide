@@ -365,7 +365,56 @@ When creating your patches please keep the rather low hardware specifications of
 
 ## 1-9.Cinder Artworks
 
-• More information to be added soon
+
+### ■ Resolution
+
+The screen will display at W1080*H1920 pixels resolution. Please be aware of this resolution when developing your artwork. Currently, display scaling is not supported.
+
+
+### ■ Frame Rate
+
+• Artworks can be played at any specified frame rate.
+
+• Depending on the CPU load, the frame rate may drop. To make the testing process easier, please include a debug option to display the FPS where possible.
+
+
+### ■ Camera/Mic
+
+• Access to the internal webcam and mic embedded at the bottom of the screen is enabled at default. The maximum FPS/Resolution for the camera is: 30FPS/W1280*H720 pixels.
+
+• The default format for the camera in the PC is read in horizontal, landscape mode. As such, when the work is displayed at fullscreen with the same aspect ratio, sides of the image may be trimmed.
+
+
+### ■ Continuous Playback Time
+
+• Any artwork application on FRAMED will be exposed to being played at maximum 24 hours for continuous playback (the device is programmed to automatically restart once a day). Please test to make sure that the artwork can be played continuously for 24 hours before submission.
+
+• Please debug and optimize the artwork as much as possible, being careful of memory leakage.
+
+• If we detect any malfunctions after the artwork has been released to the public, the artist will be responsible for modifying/updating the artwork as per the license contract. Please review the details the article 4-1 of the contract.
+
+### ■ Artwork Submission
+
+• Please submit all files listed below in one folder .zip file (in the root, no subfolders except for other related project files). [Watch this video.](https://www.youtube.com/watch?v=4DVss7Qa2Dg&feature=youtu.be):
+
+- Main file must be renamed to "main.exe", the exe file can be found at vc2015/build/Release.
+
+- Check `win32` when creating the project using Tinderbox and when deploy, use the win32 built.
+
+- Optionally set the app path as asset path to simply file structure:
+````cpp
+auto path = getAppPath();
+addAssetDirectory(path);
+````
+
+- Specify window size in settings function, full screen mode doesn't seem to be needed since Framed is not handling Cinder specifically yet.
+````cpp
+CINDER_APP(CinderApp, RendererGl, [](App::Settings *settings) {
+	settings->setWindowSize(1080, 1920);
+	settings->setResizable(false);
+	settings->setBorderless();
+})
+````
 
 ## 1-10.MaxMSP Artworks
 
